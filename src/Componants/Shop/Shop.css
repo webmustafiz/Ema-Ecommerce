@@ -1,0 +1,35 @@
+.shop-container{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    /* padding: 5%; */
+    padding: 5%;
+}
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 45px;
+}
+.card-container{
+    margin-left: 20%;
+    background-color: cadetblue;
+    padding:5%;
+}
+
+@media screen and (max-width:576px){
+    .product-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+@media screen and (max-width:1100px) {
+    .shop-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product-container{
+        width: 120px;
+    }
+    .card-container{
+        width: 120px;
+    }
+}
