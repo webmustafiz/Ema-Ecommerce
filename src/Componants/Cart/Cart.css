@@ -1,0 +1,7 @@
+.cart{
+    position: sticky;
+    top: 0;
+    padding-top: 5%;
+    color: white;
+    /* background-color: #E5E5E5; */
+}
