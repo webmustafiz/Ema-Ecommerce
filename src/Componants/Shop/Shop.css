@@ -14,6 +14,7 @@
     margin-left: 20%;
     background-color: rgb(38, 58, 58);
     padding:5%;
+    animation: ease-in-out;
 }
 
 @media screen and (max-width:576px){

@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { addToDb, getStoreCard, } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
 
 const Shop = () => {
-    const [products, setProducts] = useState([])
-
+    const products=useLoaderData()
     const [cart, setCart] = useState([])
-    
-    useEffect(() => {
-        console.log('product added before fetch')
-        fetch('products.json')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data)
-                // console.log('products loadaded')
-            })
-    },[])
-
-
+  
     // localstorage
     useEffect(() => {
-        console.log('local storage first line',products)
         const storeCard = getStoreCard()
         const saveCard = [];
         for (const id in storeCard) {
-            console.log(storeCard)
             const addProduct = products.find(product => product.id === id);
             
             if (addProduct) {
@@ -35,15 +22,23 @@ const Shop = () => {
                 saveCard.push(addProduct)
             }
         }
-        setCart(saveCard)
-        // console.log('loacal storage finished')
-    }, [products])
-    
-
-// event handlar
+        setCart(saveCard)      
+        
+}, [products])
     const handleClicked = (product) => {
-        // console.log(product)
-        const newCart = [...cart, product];
+        let newCart = [];
+        const exist = cart.find(element => element.id === product.id);
+        console.log(exist);
+        if (!exist) {
+            product.quantity = 1;
+            newCart = [...cart, product];    
+        }
+        else {
+            const restProduct = cart.filter(element => element.id !== product.id)
+            console.log(restProduct)
+            exist.quantity = exist.quantity + 1;
+            newCart = [...restProduct, exist]
+        }
         setCart(newCart);
         addToDb(product.id)
     }

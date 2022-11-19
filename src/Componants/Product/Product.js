@@ -8,6 +8,7 @@ const Product = (props) => {
     return (
         <div className='product'>
             <img src={img} alt="" />
+            {/* <img src={`img ? : 'undefined'`} alt="" /> */}
             <div className="product-info">
                 <p className='name'>{name}</p>
                 <p>${price}</p>
